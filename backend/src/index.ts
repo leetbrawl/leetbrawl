@@ -3,6 +3,8 @@ import http from 'http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import matchesRouter from './api/matches';
+import authRouter from './routes/auth';
+import protectedRouter from './routes/protected';
 import { setupSocket } from './sockets';
 
 dotenv.config();
@@ -13,7 +15,13 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-// REST API routes
+// Authentication routes
+app.use('/auth', authRouter);
+
+// Protected routes
+app.use('/api/protected', protectedRouter);
+
+// Existing routes
 app.use('/api/matches', matchesRouter);
 
 // Health check
