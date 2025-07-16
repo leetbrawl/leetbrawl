@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npx ts-node src/index.ts",
+    "prisma:generate": "npx prisma generate --schema=../prisma/prisma/schema.prisma",
+    "prisma:studio": "npx prisma studio --schema=../prisma/prisma/schema.prisma",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
