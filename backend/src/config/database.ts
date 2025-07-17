@@ -10,4 +10,6 @@ process.on('beforeExit', async () => {
   await prisma.$disconnect();
 });
 
+//testing
+
 export { prisma };
