@@ -3,6 +3,9 @@ import http from 'http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import matchesRouter from './api/matches';
+import usersRouter from './api/users';
+import friendsRouter from './api/friends';
+import analyticsRouter from './api/analytics';
 import authRouter from './routes/auth';
 import protectedRouter from './routes/protected';
 import { setupSocket } from './sockets';
@@ -21,8 +24,11 @@ app.use('/auth', authRouter);
 // Protected routes
 app.use('/api/protected', protectedRouter);
 
-// Existing routes
+// API routes
 app.use('/api/matches', matchesRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/friends', friendsRouter);
+app.use('/api/analytics', analyticsRouter);
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
