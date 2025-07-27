@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Zap, TrophyIcon, Brain, Users } from "lucide-react"
+import { motion } from "framer-motion"
 
 const features = [
   {
@@ -40,34 +41,52 @@ export default function Features() {
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="space-y-16">
-          <div className="space-y-4">
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Built for competitive programmers</h2>
             <p className="text-xl text-gray-300 max-w-2xl">
               Every feature designed to make you a better coder through real competition.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="group relative bg-gradient-to-br from-indigo-900/30 via-teal-950/20 to-indigo-900/30 border border-indigo-700/30 hover:border-indigo-600/50 transition-all duration-300 backdrop-blur-sm hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-1">
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/10 to-teal-700/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-                
-                <CardContent className="p-6 space-y-4 relative z-10">
-                  <div className="h-14 w-14 bg-gradient-to-br from-indigo-500 to-teal-700 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    {feature.icon}
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-indigo-200 transition-colors duration-300">{feature.title}</h3>
-                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{feature.description}</p>
-                  </div>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
+              >
+                <Card className="group relative bg-gradient-to-br from-indigo-900/30 via-teal-950/20 to-indigo-900/30 border border-indigo-700/30 hover:border-indigo-600/50 transition-all duration-300 backdrop-blur-sm hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-1">
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/10 to-teal-700/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
                   
-                  {/* Hover Indicator */}
-                  <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="h-2 w-2 bg-indigo-400 rounded-full animate-pulse"></div>
-                  </div>
-                </CardContent>
-              </Card>
+                  <CardContent className="p-6 space-y-4 relative z-10">
+                    <div className="h-14 w-14 bg-gradient-to-br from-indigo-500 to-teal-700 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      {feature.icon}
+                    </div>
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-bold text-white group-hover:text-indigo-200 transition-colors duration-300">{feature.title}</h3>
+                      <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{feature.description}</p>
+                    </div>
+                    
+                    {/* Hover Indicator */}
+                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="h-2 w-2 bg-indigo-400 rounded-full animate-pulse"></div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>

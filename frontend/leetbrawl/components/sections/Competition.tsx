@@ -2,23 +2,36 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Target, Trophy, Briefcase, Users as UsersIcon, MapPin, Lightning } from "@phosphor-icons/react"
+import { motion } from "framer-motion"
 
 export default function Competition() {
   return (
     <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="max-w-7xl mx-auto px-6">
         <div className="space-y-16">
-          <div className="space-y-4">
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Local Competition, Global Glory</h2>
             <p className="text-xl text-gray-300 max-w-3xl leading-relaxed">
               Start your competitive coding journey close to home. Challenge classmates, rival schools, and nearby universities. Build your reputation in your local scene before taking on the world.
             </p>
-          </div>
+          </motion.div>
 
           {/* Advanced Competition Network */}
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left: Interactive Network Visualization */}
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <div className="bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-600/30 p-8 shadow-xl shadow-slate-500/10">
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
@@ -72,12 +85,24 @@ export default function Competition() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right: Advanced Features */}
-            <div className="space-y-8">
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
+                <motion.div 
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
                   <div className="h-12 w-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Target className="h-6 w-6 text-white" />
                   </div>
@@ -87,9 +112,15 @@ export default function Competition() {
                       Our AI finds the perfect opponents from your school, rival universities, and nearby cities. Get matched based on skill level, location, and rivalry preferences.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex items-start gap-4">
+                <motion.div 
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                >
                   <div className="h-12 w-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Trophy className="h-6 w-6 text-white" />
                   </div>
@@ -99,9 +130,15 @@ export default function Competition() {
                       Earn 2x ELO when competing against rival schools. Create epic rivalries and watch your school dominate the regional leaderboards.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex items-start gap-4">
+                <motion.div 
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 1.0 }}
+                >
                   <div className="h-12 w-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Briefcase className="h-6 w-6 text-white" />
                   </div>
@@ -111,9 +148,9 @@ export default function Competition() {
                       Practice with problems from top tech companies. Compete against students targeting the same companies and build your professional network.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
