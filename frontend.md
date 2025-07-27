@@ -1,534 +1,124 @@
-# LeetBrawl Frontend - Complete Beginner's Guide
+# How the Leetbrawl Frontend Works (Beginner Guide)
 
-## Table of Contents
-1. [What is a Frontend?](#what-is-a-frontend)
-2. [Project Structure Explained](#project-structure-explained)
-3. [How Next.js Works](#how-nextjs-works)
-4. [Understanding the File Structure](#understanding-the-file-structure)
-5. [How Components Work](#how-components-work)
-6. [Styling with Tailwind CSS](#styling-with-tailwind-css)
-7. [TypeScript Basics](#typescript-basics)
-8. [How the App Works](#how-the-app-works)
-9. [Development Workflow](#development-workflow)
-10. [Common Commands](#common-commands)
-11. [Troubleshooting](#troubleshooting)
+## 1. What is this project?
+
+This is a **web app** built with [Next.js](https://nextjs.org/) and [React](https://react.dev/).  
+It lets users compete in real-time coding battles, practice problems, and challenge friends.
 
 ---
 
-## What is a Frontend?
+## 2. How does a modern website like this work?
 
-Think of a website like a restaurant:
-- **Backend** = Kitchen (where food is prepared, data is processed)
-- **Frontend** = Dining room (what customers see and interact with)
-
-The **frontend** is everything users see in their browser:
-- The website layout
-- Buttons, forms, and interactive elements
-- Colors, fonts, and styling
-- Animations and transitions
-
-In LeetBrawl, the frontend is what users see when they:
-- Visit the homepage to see available matches
-- Join a match and see the problem statement
-- Write code in the editor
-- View their opponent's code
-- Submit solutions
+- **HTML** is the basic structure.
+- **CSS** (with [Tailwind CSS](https://tailwindcss.com/)) is used for styling.
+- **JavaScript/TypeScript** (with React) is used to make the site interactive.
+- **Next.js** helps organize the site into pages and handles navigation (moving between pages) without reloading the whole site.
 
 ---
 
-## Project Structure Explained
+## 3. Project Structure
 
-Your LeetBrawl project is organized like this:
-
-```
-leetbrawl/                    # Main project folder
-├── frontend/                 # Everything users see in browser
-│   ├── app/                  # Pages (homepage, match page, etc.)
-│   ├── components/           # Reusable UI pieces
-│   ├── lib/                  # Helper functions and utilities
-│   ├── public/               # Images, icons, static files
-│   ├── package.json          # List of software packages used
-│   └── tsconfig.json         # TypeScript configuration
-├── backend/                  # Server that handles data and logic
-├── prisma/                   # Database management
-└── leetbrawl/               # Docker setup for local development
-```
-
-**Why this structure?**
-- **Separation of concerns**: Each part has a specific job
-- **Team collaboration**: Different people can work on different parts
-- **Maintenance**: Easy to find and fix problems
-- **Scalability**: Easy to add new features
+- `app/` — Main folder for all the website's pages and layouts.
+- `components/` — Reusable building blocks (like buttons, cards, code editor, etc).
+- `public/` — Static files (like images and icons).
+- `lib/` — Utility/helper functions.
+- `package.json` — Lists the tools and libraries used.
+- `globals.css` — Global styles for the whole site.
 
 ---
 
-## How Next.js Works
+## 4. How does navigation work?
 
-**Next.js** is a framework that makes building websites easier. Think of it like a smart template system:
-
-### What Next.js Does:
-1. **Creates pages automatically** from files in the `app/` folder
-2. **Handles routing** (when you click a link, it shows the right page)
-3. **Optimizes performance** (makes your website load faster)
-4. **Provides development tools** (hot reload, error messages)
-
-### File-Based Routing:
-```
-app/
-├── page.tsx              # Homepage (http://localhost:3000/)
-├── match/
-│   └── [matchId]/
-│       └── page.tsx      # Match page (http://localhost:3000/match/123)
-└── user/
-    └── [userId]/
-        └── page.tsx      # User profile (http://localhost:3000/user/456)
-```
-
-**How it works:**
-- `page.tsx` = the main content of that page
-- `[matchId]` = a dynamic route (can be any match ID)
-- Next.js automatically creates the URL structure
+- Each file in `app/` (like `page.tsx`) is a **page** on the website.
+- Folders inside `app/` (like `practice/`, `match/`) are **routes** (URLs).
+- Special files like `[matchId]/page.tsx` mean the page can show different content depending on the URL (for example, `/match/123` and `/match/456`).
 
 ---
 
-## Understanding the File Structure
+## 5. Main Pages
 
-Let's go through each important file and folder:
+- **Homepage (`app/page.tsx`)**  
+  Shows the main features, a leaderboard, and buttons to start playing or try a demo.
 
-### `/frontend/app/` - Pages
-```
-app/
-├── page.tsx              # Homepage (currently shows Next.js default)
-├── layout.tsx            # Template that wraps all pages
-├── globals.css           # Global styles (colors, fonts, etc.)
-├── match-page.tsx        # Your match interface (needs to be moved)
-├── practice/             # Practice mode pages
-└── match/                # Match-related pages
-```
+- **Practice Modes (`app/practice/`)**
+  - `free/page.tsx` — Practice problems at your own pace.
+  - `ranked/page.tsx` — Compete for a ranking.
+  - `friend/page.tsx` — Challenge a friend.
 
-**What each file does:**
-- `page.tsx` = The main content of the homepage
-- `layout.tsx` = The template (header, footer, navigation)
-- `globals.css` = Global styling rules
-- `match-page.tsx` = Your v0.dev generated match interface
-
-### `/frontend/components/` - Reusable UI Pieces
-```
-components/
-├── ui/                   # Basic UI components (buttons, cards, etc.)
-│   ├── button.tsx        # Button component
-│   ├── card.tsx          # Card component
-│   ├── badge.tsx         # Badge component
-│   └── ...
-├── code-editor.tsx       # Code editing interface
-├── problem-statement.tsx # Problem display
-├── opponent-code-modal.tsx # Opponent code preview
-└── match-card.tsx        # Match listing cards
-```
-
-**Why components?**
-- **Reusability**: Use the same button everywhere
-- **Consistency**: All buttons look the same
-- **Maintenance**: Change button style in one place
-- **Organization**: Keep related code together
-
-### `/frontend/lib/` - Helper Functions
-```
-lib/
-├── api.ts               # Functions to talk to backend
-├── socket.ts            # Real-time communication
-└── utils.ts             # General helper functions
-```
-
-**What these do:**
-- `api.ts` = Functions to send/receive data from your server
-- `socket.ts` = Real-time updates (opponent typing, match status)
-- `utils.ts` = Common functions used throughout the app
-
-### `/frontend/public/` - Static Files
-```
-public/
-├── favicon.ico          # Website icon
-├── next.svg             # Next.js logo
-└── ...                  # Other images, icons, files
-```
-
-**Static files** = Files that don't change (images, icons, fonts)
+- **Match Page (`app/match/[matchId]/page.tsx`)**  
+  Shows a live coding battle between you and another user.
 
 ---
 
-## How Components Work
+## 6. Main Components
 
-A **component** is like a LEGO block - a reusable piece of UI. Let's look at a simple example:
-
-### Simple Button Component:
-```tsx
-// components/ui/button.tsx
-import React from 'react'
-
-interface ButtonProps {
-  children: React.ReactNode  // What goes inside the button
-  onClick?: () => void       // What happens when clicked
-  variant?: 'primary' | 'secondary'  // Button style
-}
-
-export function Button({ children, onClick, variant = 'primary' }: ButtonProps) {
-  return (
-    <button 
-      onClick={onClick}
-      className={`px-4 py-2 rounded ${
-        variant === 'primary' 
-          ? 'bg-blue-500 text-white' 
-          : 'bg-gray-200 text-black'
-      }`}
-    >
-      {children}
-    </button>
-  )
-}
-```
-
-### Using the Button:
-```tsx
-// In any page or component
-import { Button } from '@/components/ui/button'
-
-export default function HomePage() {
-  return (
-    <div>
-      <h1>Welcome to LeetBrawl</h1>
-      <Button onClick={() => alert('Hello!')}>
-        Create Match
-      </Button>
-    </div>
-  )
-}
-```
-
-**How it works:**
-1. **Define** the component (what it looks like, what it accepts)
-2. **Import** it where you want to use it
-3. **Use** it with different props (data you pass to it)
+- **ProblemStatement** — Shows the coding problem, examples, and constraints.
+- **CodeEditor** — Where you write and test your code.
+- **OpponentCodeModal** — Lets you view your opponent's code.
+- **MatchCard** — Shows info about a match.
+- **UI Components** (in `components/ui/`) — Buttons, cards, badges, dialogs, etc.
 
 ---
 
-## Styling with Tailwind CSS
+## 7. How does a page work?
 
-**Tailwind CSS** is a utility-first CSS framework. Instead of writing custom CSS, you use pre-built classes:
-
-### Traditional CSS vs Tailwind:
-```css
-/* Traditional CSS */
-.my-button {
-  background-color: blue;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-```
-
-```tsx
-// Tailwind CSS (in your component)
-<button className="bg-blue-500 text-white px-4 py-2 rounded font-bold">
-  Click me
-</button>
-```
-
-### Common Tailwind Classes:
-- `bg-blue-500` = Blue background
-- `text-white` = White text
-- `px-4` = Horizontal padding (left/right)
-- `py-2` = Vertical padding (top/bottom)
-- `rounded` = Rounded corners
-- `font-bold` = Bold text
-- `hover:bg-blue-600` = Darker blue on hover
-- `flex` = Flexbox layout
-- `justify-center` = Center horizontally
-- `items-center` = Center vertically
-
-### Dark Mode:
-```tsx
-<div className="bg-white dark:bg-gray-900 text-black dark:text-white">
-  This adapts to light/dark mode
-</div>
-```
+Each page is a **React component** (a function that returns what should be shown on the screen).  
+Example:  
+- The homepage (`app/page.tsx`) shows a header, hero section, features, leaderboard, and footer.
+- The ranked practice page (`app/practice/ranked/page.tsx`) shows a problem, a code editor, and lets you run tests or submit your solution.
 
 ---
 
-## TypeScript Basics
+## 8. How does the code editor work?
 
-**TypeScript** is JavaScript with extra safety features. It helps catch errors before your code runs:
-
-### Basic Types:
-```tsx
-// String
-const name: string = "John"
-
-// Number
-const age: number = 25
-
-// Boolean
-const isActive: boolean = true
-
-// Array
-const languages: string[] = ["JavaScript", "Python", "C++"]
-
-// Object
-interface User {
-  id: string
-  name: string
-  email: string
-  rating: number
-}
-
-const user: User = {
-  id: "123",
-  name: "John",
-  email: "john@example.com",
-  rating: 1500
-}
-```
-
-### Function Types:
-```tsx
-// Function that takes a string and returns a number
-function calculateRating(username: string): number {
-  return username.length * 100
-}
-
-// Function with optional parameter
-function createMatch(problemId?: string) {
-  if (problemId) {
-    console.log(`Creating match with problem ${problemId}`)
-  } else {
-    console.log("Creating match with random problem")
-  }
-}
-```
-
-### Why TypeScript?
-- **Catches errors** before running code
-- **Better IDE support** (autocomplete, suggestions)
-- **Self-documenting** code
-- **Easier refactoring**
+- You can select a programming language.
+- Write your code in the editor.
+- Click "Run Tests" to check your solution against sample inputs.
+- Click "Submit" to submit your solution for scoring.
 
 ---
 
-## How the App Works
+## 9. How does styling work?
 
-Let's trace through how a user interacts with LeetBrawl:
-
-### 1. User visits homepage:
-```
-User types: http://localhost:3000/
-↓
-Next.js loads: app/page.tsx
-↓
-Shows: Homepage with match listings
-```
-
-### 2. User clicks "Join Match":
-```
-User clicks: "Join Match" button
-↓
-Next.js navigates to: /match/123
-↓
-Loads: app/match/[matchId]/page.tsx
-↓
-Shows: Match interface with problem and editor
-```
-
-### 3. User writes code:
-```
-User types: in the code editor
-↓
-Component: code-editor.tsx updates
-↓
-WebSocket: Sends code to opponent (real-time)
-↓
-Backend: Receives and processes code
-```
-
-### 4. User submits solution:
-```
-User clicks: "Submit" button
-↓
-API call: POST /api/matches/123/submit
-↓
-Backend: Runs code against test cases
-↓
-WebSocket: Sends result back to user
-↓
-UI updates: Shows success/error message
-```
+- The site uses **Tailwind CSS** for styling.  
+  Instead of writing regular CSS, you use special class names like `bg-slate-900` or `text-white` right in your HTML/JSX.
 
 ---
 
-## Development Workflow
+## 10. How do I run the site?
 
-### Starting Development:
-```bash
-# 1. Navigate to frontend directory
-cd frontend
-
-# 2. Install dependencies (if first time)
-npm install
-
-# 3. Start development server
-npm run dev
-```
-
-### Making Changes:
-1. **Edit files** in your code editor
-2. **Save the file**
-3. **Browser automatically updates** (hot reload)
-4. **See changes immediately**
-
-### Adding New Features:
-1. **Create new component** in `components/`
-2. **Add new page** in `app/`
-3. **Update routing** if needed
-4. **Test in browser**
-
-### Installing New Packages:
-```bash
-# Add a new package
-npm install package-name
-
-# Add development package
-npm install --save-dev package-name
-
-# Add shadcn/ui component
-npx shadcn@latest add component-name
-```
+1. Open a terminal in the `frontend/leetbrawl` folder.
+2. Run `npm install` to install dependencies.
+3. Run `npm run dev` to start the development server.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## Common Commands
+## 11. What tools and libraries are used?
 
-### Development:
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Check for code errors
-```
-
-### Package Management:
-```bash
-npm install          # Install all dependencies
-npm install package  # Install specific package
-npm uninstall package # Remove package
-npm update           # Update packages
-```
-
-### shadcn/ui:
-```bash
-npx shadcn@latest add button    # Add button component
-npx shadcn@latest add card      # Add card component
-npx shadcn@latest add dialog    # Add dialog component
-```
-
-### Git:
-```bash
-git add .            # Stage all changes
-git commit -m "message"  # Commit changes
-git push             # Upload to GitHub
-git pull             # Download from GitHub
-```
+- **Next.js** — Organizes pages and handles navigation.
+- **React** — Builds interactive user interfaces.
+- **Tailwind CSS** — For styling.
+- **Radix UI** — For accessible UI components (like dialogs, avatars).
+- **Lucide React** — For icons.
+- **TypeScript** — Adds type safety to JavaScript.
 
 ---
 
-## Troubleshooting
+## 12. Where do I start if I want to change something?
 
-### Common Issues:
-
-**1. "Module not found" error:**
-```bash
-# Solution: Install missing package
-npm install package-name
-```
-
-**2. "Port 3000 is already in use":**
-```bash
-# Solution: Kill the process or use different port
-npm run dev -- -p 3001
-```
-
-**3. "TypeScript errors":**
-```bash
-# Solution: Check your types
-npm run lint
-```
-
-**4. "Page not found":**
-- Check if file exists in `app/` folder
-- Check file name (must be `page.tsx`)
-- Check folder structure
-
-**5. "Component not working":**
-- Check imports (case-sensitive)
-- Check if component is exported
-- Check browser console for errors
-
-### Debugging Tips:
-
-**1. Browser Developer Tools:**
-- Press F12 to open
-- Check Console tab for errors
-- Check Network tab for API calls
-- Check Elements tab for HTML structure
-
-**2. Console Logging:**
-```tsx
-console.log("Debug info:", someVariable)
-console.error("Error occurred:", error)
-```
-
-**3. React Developer Tools:**
-- Install browser extension
-- Inspect component props and state
-- See component hierarchy
+- To change the homepage: edit `app/page.tsx`.
+- To change a practice mode: edit the relevant file in `app/practice/`.
+- To change a component (like the code editor): edit files in `components/`.
 
 ---
 
-## Next Steps
+## 13. Where can I learn more?
 
-Now that you understand the basics:
-
-1. **Explore the code**: Look at existing components
-2. **Make small changes**: Try changing colors or text
-3. **Add new features**: Create simple components
-4. **Learn more**: Read Next.js and React documentation
-5. **Practice**: Build small projects to reinforce concepts
-
-Remember: **Web development is learned by doing**. Don't worry if you don't understand everything at first - it will make sense as you work with the code!
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev/learn)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
 ---
 
-## Quick Reference
-
-### File Locations:
-- **Pages**: `frontend/app/`
-- **Components**: `frontend/components/`
-- **Styles**: `frontend/app/globals.css`
-- **Configuration**: `frontend/package.json`
-
-### Key Technologies:
-- **Next.js**: Framework for building the app
-- **React**: Library for creating components
-- **TypeScript**: JavaScript with type safety
-- **Tailwind CSS**: Utility-first styling
-- **shadcn/ui**: Pre-built UI components
-
-### Development Server:
-- **URL**: http://localhost:3000
-- **Command**: `npm run dev`
-- **Hot Reload**: Automatic updates when you save
-
-### Important Files:
-- `app/page.tsx` = Homepage
-- `app/layout.tsx` = Page template
-- `components/ui/` = Basic UI components
-- `package.json` = Dependencies and scripts 
+**This guide is for beginners! If you have questions, just look at the file names and folder structure, and try changing something small to see what happens.** 
