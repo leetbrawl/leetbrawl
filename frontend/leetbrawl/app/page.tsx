@@ -128,9 +128,31 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* Hero Section - Dark blue with tech pattern */}
+      <section className="py-20 lg:py-32 relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
+        {/* Tech Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 50%),
+              linear-gradient(45deg, transparent 40%, rgba(59, 130, 246, 0.1) 50%, transparent 60%),
+              linear-gradient(-45deg, transparent 40%, rgba(16, 185, 129, 0.1) 50%, transparent 60%)
+            `,
+            backgroundSize: '100% 100%, 100% 100%, 60px 60px, 60px 60px',
+            backgroundPosition: '0 0, 0 0, 0 0, 30px 30px'
+          }}></div>
+          {/* Code-like grid pattern */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left Content */}
             <div className="space-y-8">
@@ -161,15 +183,15 @@ export default function HomePage() {
               <Card className="bg-gray-800 border-gray-600 shadow-2xl">
                 <CardContent className="p-0">
                   {/* Mockup Header */}
-                  <div className="border-b border-gray-600 px-4 py-2">
+                  <div className="border-b border-gray-600 px-4 py-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <TrophyIcon className="h-5 w-5 text-[#10b981]" />
-                        <span className="font-medium text-white">Live Battle</span>
+                        <TrophyIcon className="h-6 w-6 text-[#10b981]" />
+                        <span className="font-semibold text-white text-xl">Live Battle</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Timer className="h-4 w-4 text-orange-400" />
-                        <span className="text-orange-400 font-mono">12:34</span>
+                        <Timer className="h-5 w-5 text-orange-400" />
+                        <span className="text-orange-400 font-mono text-lg">12:34</span>
                       </div>
                     </div>
                   </div>
@@ -238,9 +260,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-slate-900">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* Features Section - Indigo gradient */}
+      <section id="features" className="py-20 bg-gradient-to-br from-indigo-950 via-teal-950 to-indigo-950 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 75% 75%, rgba(20, 184, 166, 0.3) 0%, transparent 50%)
+            `,
+            backgroundSize: '100% 100%, 100% 100%'
+          }}></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="space-y-16">
             <div className="space-y-4">
               <h2 className="text-3xl lg:text-4xl font-bold text-white">Built for competitive programmers</h2>
@@ -251,14 +284,22 @@ export default function HomePage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
-                <Card key={index} className="bg-[#0e0e10] border-gray-800 hover:border-gray-700 transition-colors">
-                  <CardContent className="p-6 space-y-4">
-                    <div className="h-12 w-12 bg-[#10b981]/10 rounded-lg flex items-center justify-center text-[#10b981]">
+                <Card key={index} className="group relative bg-gradient-to-br from-indigo-900/30 via-teal-950/20 to-indigo-900/30 border border-indigo-700/30 hover:border-indigo-600/50 transition-all duration-300 backdrop-blur-sm hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-1">
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/10 to-teal-700/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                  
+                  <CardContent className="p-6 space-y-4 relative z-10">
+                    <div className="h-14 w-14 bg-gradient-to-br from-indigo-500 to-teal-700 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
                       {feature.icon}
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
-                      <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-bold text-white group-hover:text-indigo-200 transition-colors duration-300">{feature.title}</h3>
+                      <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{feature.description}</p>
+                    </div>
+                    
+                    {/* Hover Indicator */}
+                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="h-2 w-2 bg-indigo-400 rounded-full animate-pulse"></div>
                     </div>
                   </CardContent>
                 </Card>
@@ -268,8 +309,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Local Competition Section */}
-      <section className="py-20 bg-gray-900">
+      {/* Local Competition Section - Muted green gradient */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-6">
           <div className="space-y-16">
             <div className="space-y-4">
@@ -283,27 +324,27 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left: Interactive Network Visualization */}
               <div className="relative">
-                <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl border border-purple-500/20 p-8 shadow-xl shadow-purple-500/10">
+                <div className="bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-600/30 p-8 shadow-xl shadow-slate-500/10">
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
                       <h3 className="text-xl font-semibold text-white">Your Local Network</h3>
-                      <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                      <Badge className="bg-slate-600/20 text-slate-300 border-slate-500/30">
                         Live
                       </Badge>
                     </div>
                     
                     {/* Network Stats */}
                     <div className="grid grid-cols-3 gap-4">
-                      <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-purple-500/10">
-                        <div className="text-2xl font-bold text-purple-400">847</div>
+                      <div className="text-center p-4 bg-slate-700/30 rounded-lg border border-slate-600/20">
+                        <div className="text-2xl font-bold text-slate-300">847</div>
                         <div className="text-sm text-gray-400">Nearby Students</div>
                       </div>
-                      <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-purple-500/10">
+                      <div className="text-center p-4 bg-slate-700/30 rounded-lg border border-slate-600/20">
                         <div className="text-2xl font-bold text-blue-400">12</div>
                         <div className="text-sm text-gray-400">Active Rivalries</div>
                       </div>
-                      <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-purple-500/10">
-                        <div className="text-2xl font-bold text-purple-400">2.4x</div>
+                      <div className="text-center p-4 bg-slate-700/30 rounded-lg border border-slate-600/20">
+                        <div className="text-2xl font-bold text-slate-300">2.4x</div>
                         <div className="text-sm text-gray-400">ELO Multiplier</div>
                       </div>
                     </div>
@@ -313,11 +354,11 @@ export default function HomePage() {
                       <h4 className="font-medium text-white">Recent Activity</h4>
                       <div className="space-y-2 max-h-32 overflow-y-auto">
                         <div className="flex items-center gap-3 text-sm">
-                          <div className="h-2 w-2 rounded-full bg-purple-400"></div>
+                          <div className="h-2 w-2 rounded-full bg-slate-400"></div>
                           <span className="text-gray-300">alex_chen</span>
                           <span className="text-gray-500">defeated</span>
                           <span className="text-gray-300">sarah_dev</span>
-                          <span className="text-purple-400">+45 ELO</span>
+                          <span className="text-slate-300">+45 ELO</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm">
                           <div className="h-2 w-2 rounded-full bg-orange-400"></div>
@@ -326,11 +367,11 @@ export default function HomePage() {
                           <span className="text-blue-400">Stanford vs Berkeley</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm">
-                          <div className="h-2 w-2 rounded-full bg-purple-400"></div>
+                          <div className="h-2 w-2 rounded-full bg-slate-400"></div>
                           <span className="text-gray-300">jenny_algo</span>
                           <span className="text-gray-500">solved</span>
                           <span className="text-gray-300">Binary Tree Max Path</span>
-                          <span className="text-purple-400">in 8:32</span>
+                          <span className="text-slate-300">in 8:32</span>
                         </div>
                       </div>
                     </div>
@@ -342,12 +383,12 @@ export default function HomePage() {
               <div className="space-y-8">
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="h-12 w-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="h-12 w-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Target className="h-6 w-6 text-white" />
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-2 text-white">Smart Matchmaking</h3>
-                      <p className="text-gray-400 leading-relaxed">
+                      <p className="text-gray-300 leading-relaxed">
                         Our AI finds the perfect opponents from your school, rival universities, and nearby cities. Get matched based on skill level, location, and rivalry preferences.
                       </p>
                     </div>
@@ -359,7 +400,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-2 text-white">School Rivalries</h3>
-                      <p className="text-gray-400 leading-relaxed">
+                      <p className="text-gray-300 leading-relaxed">
                         Earn 2x ELO when competing against rival schools. Create epic rivalries and watch your school dominate the regional leaderboards.
                       </p>
                     </div>
@@ -371,60 +412,21 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-2 text-white">Interview Preparation</h3>
-                      <p className="text-gray-400 leading-relaxed">
+                      <p className="text-gray-300 leading-relaxed">
                         Practice with problems from top tech companies. Compete against students targeting the same companies and build your professional network.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Quick Actions */}
-                <div className="bg-slate-800/40 rounded-lg p-6 border border-purple-500/20">
-                  <h4 className="font-medium mb-4 text-white">Quick Actions</h4>
-                  <div className="grid grid-cols-2 gap-3">
-                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
-                      <MapPin className="h-4 w-4 mr-2" />
-                      Find Nearby
-                    </Button>
-                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
-                      <Trophy className="h-4 w-4 mr-2" />
-                      Join Rivalry
-                    </Button>
-                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
-                      <UsersIcon className="h-4 w-4 mr-2" />
-                      Create Team
-                    </Button>
-                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
-                      <Lightning className="h-4 w-4 mr-2" />
-                      View Rankings
-                    </Button>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-slate-900">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white">Ready to start competing?</h2>
-            <p className="text-xl text-gray-300">Join thousands of students in real-time coding battles.</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              onClick={handleStartMatch}
-              className="bg-[#10b981] hover:bg-[#059669] text-white px-8 py-3 text-lg font-medium"
-            >
-              Start Competing Now
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-      </section>
+
 
       {/* Footer */}
       <footer className="border-t border-gray-800 bg-[#0e0e10]">
