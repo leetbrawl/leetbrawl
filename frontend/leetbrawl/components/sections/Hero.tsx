@@ -1,11 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Code2, ArrowRight, Timer, TrophyIcon } from "lucide-react"
+import { Code2, ArrowRight, Timer } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { TrophyIcon } from "@/components/ui/trophy-icon"
 
 export default function Hero() {
   const router = useRouter()
@@ -15,109 +16,135 @@ export default function Hero() {
   }
 
   return (
-    <section className="container flex min-h-[calc(100vh-3.5rem)] max-w-screen-2xl flex-col items-center justify-center space-y-8 py-24 text-center md:py-32">
-      <div className="space-y-4">
-        <Badge className="bg-primary/10 text-primary border-primary/20 w-fit text-xs font-medium">
-          Real-time competitive coding
-        </Badge>
-        <h1 className="bg-gradient-to-br from-foreground from-30% via-foreground/90 to-foreground/70 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
-          Code faster.
-          <br />
-          Think smarter.
-          <br />
-          <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Win more.
-          </span>
-        </h1>
-        <p className="mx-auto max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-          Face off against other developers in real-time 1v1 coding battles. Solve the same algorithmic problems simultaneously and see who comes out on top.
-        </p>
+    <section className="py-20 lg:py-32 relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
+      {/* Tech Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 50%),
+            linear-gradient(45deg, transparent 40%, rgba(59, 130, 246, 0.1) 50%, transparent 60%),
+            linear-gradient(-45deg, transparent 40%, rgba(16, 185, 129, 0.1) 50%, transparent 60%)
+          `,
+          backgroundSize: '100% 100%, 100% 100%, 60px 60px, 60px 60px',
+          backgroundPosition: '0 0, 0 0, 0 0, 30px 30px'
+        }}></div>
+        {/* Code-like grid pattern */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}></div>
       </div>
       
-      <div className="flex gap-4">
-        <Button size="lg" onClick={handleStartMatch} className="bg-primary hover:bg-primary/90">
-          Start a Match
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
-
-      {/* Live Battle Preview */}
-      <div className="mt-16 w-full max-w-4xl">
-        <Card className="bg-card/50 backdrop-blur-sm border-border/50">
-          <CardContent className="p-0">
-            {/* Mockup Header */}
-            <div className="border-b border-border/50 px-4 py-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <TrophyIcon className="h-4 w-4 text-primary" />
-                  <span className="font-medium text-sm">Live Battle</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Timer className="h-3 w-3 text-orange-400" />
-                  <span className="text-orange-400 font-mono text-sm">12:34</span>
-                </div>
-              </div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Content */}
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                Prep Smarter.
+                <br />
+                <span className="text-[#10b981]">Brawl Harder.</span>
+              </h1>
+              <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
+                Tired of solo grinding? LeetBrawl turns interview prep into real-time 1v1 coding battles. Challenge friends, match with nearby students, or brawl against coders from rival schools. Fast, fun, and built for getting better.
+              </p>
             </div>
 
-            {/* Mockup Content */}
-            <div className="p-4 space-y-4">
-              {/* Problem Title */}
-              <div className="space-y-2">
-                <h3 className="text-base font-semibold">Binary Tree Maximum Path Sum</h3>
-                <div className="flex gap-2">
-                  <Badge className="bg-red-500/10 text-red-400 border-red-500/20 text-xs">Hard</Badge>
-                  <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20 text-xs">Trees</Badge>
-                </div>
-              </div>
-
-              {/* Players */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Avatar className="h-5 w-5 bg-blue-500">
-                      <AvatarFallback className="text-xs font-semibold">NF</AvatarFallback>
-                    </Avatar>
-                    <span className="text-xs font-medium">noforget (You)</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
-                    <Badge className="bg-blue-500/20 text-blue-300 text-xs">C++</Badge>
-                  </div>
-                  <div className="bg-muted rounded p-2 font-mono text-xs space-y-0.5">
-                    <div className="text-muted-foreground">// Your solution</div>
-                    <div><span className="text-blue-400">class</span> <span className="text-yellow-400">Solution</span> <span className="text-foreground">{"{"}</span></div>
-                    <div className="ml-2"><span className="text-blue-400">int</span> <span className="text-yellow-400">maxPathSum</span><span className="text-foreground">(</span><span className="text-green-400">TreeNode*</span> <span className="text-foreground">root) {"{"}</span></div>
-                    <div className="ml-4"><span className="text-blue-400">int</span> <span className="text-yellow-400">maxSum</span> <span className="text-foreground">=</span> <span className="text-purple-400">INT_MIN</span><span className="text-foreground">;</span></div>
-                    <div className="ml-4"><span className="text-yellow-400">dfs</span><span className="text-foreground">(root, maxSum);</span></div>
-                    <div className="ml-4"><span className="text-blue-400">return</span> <span className="text-foreground">maxSum;</span></div>
-                    <div className="ml-2"><span className="text-foreground">{"}"}</span></div>
-                    <div><span className="text-foreground">{"}"}</span></div>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Avatar className="h-5 w-5 bg-purple-500">
-                      <AvatarFallback className="text-xs font-semibold">BM</AvatarFallback>
-                    </Avatar>
-                    <span className="text-xs font-medium">bigmama44</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse"></div>
-                    <Badge className="bg-orange-500/20 text-orange-300 text-xs">Java</Badge>
-                  </div>
-                  <div className="bg-muted rounded p-2 font-mono text-xs space-y-0.5">
-                    <div className="text-muted-foreground">// Opponent typing...</div>
-                    <div><span className="text-blue-400">class</span> <span className="text-yellow-400">Solution</span> <span className="text-foreground">{"{"}</span></div>
-                    <div className="ml-2"><span className="text-blue-400">public</span> <span className="text-blue-400">int</span> <span className="text-yellow-400">maxPathSum</span><span className="text-foreground">(</span><span className="text-green-400">TreeNode</span> <span className="text-foreground">root) {"{"}</span></div>
-                    <div className="ml-4"><span className="text-blue-400">if</span><span className="text-foreground">(root ==</span><span className="text-purple-400">null</span><span className="text-foreground">)</span> <span className="text-blue-400">return</span> <span className="text-purple-400">0</span><span className="text-foreground">;</span></div>
-                    <div className="ml-4"><span className="text-blue-400">int</span><span className="text-foreground">[] maxSum = {"{"}</span><span className="text-green-400">Integer.MIN_VALUE</span><span className="text-foreground">{"}"};</span></div>
-                    <div className="ml-4"><span className="text-yellow-400">dfs</span><span className="text-foreground">(root, maxSum);</span></div>
-                    <div className="ml-4"><span className="text-blue-400">return</span> <span className="text-foreground">maxSum[0];</span></div>
-                    <div className="ml-2"><span className="text-foreground">{"}"}</span></div>
-                    <div><span className="text-foreground">{"}"}</span></div>
-                  </div>
-                </div>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                size="lg"
+                onClick={handleStartMatch}
+                className="bg-[#10b981] hover:bg-[#059669] text-white px-8 py-3 text-lg font-medium"
+              >
+                Start a Match
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+          {/* Right Mockup */}
+          <div className="relative">
+            <Card className="bg-gray-800 border-gray-600 shadow-2xl">
+              <CardContent className="p-0">
+                {/* Mockup Header */}
+                <div className="border-b border-gray-600 px-4 py-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <TrophyIcon className="h-6 w-6 text-[#10b981]" />
+                      <span className="font-semibold text-white text-xl">Live Battle</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Timer className="h-5 w-5 text-orange-400" />
+                      <span className="text-orange-400 font-mono text-lg">12:34</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mockup Content */}
+                <div className="p-6 space-y-6">
+                  {/* Problem Title */}
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-white">Binary Tree Maximum Path Sum</h3>
+                    <div className="flex gap-2">
+                      <Badge className="bg-red-500/10 text-red-400 border-red-500/20">Hard</Badge>
+                      <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20">Trees</Badge>
+                    </div>
+                  </div>
+
+                  {/* Players */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <Avatar className="h-6 w-6 bg-blue-500">
+                          <AvatarFallback className="text-xs font-semibold">NF</AvatarFallback>
+                        </Avatar>
+                        <span className="text-sm font-medium text-white">noforget (You)</span>
+                        <div className="h-2 w-2 rounded-full bg-[#10b981]"></div>
+                        <Badge className="bg-blue-500/20 text-blue-300 text-xs">C++</Badge>
+                      </div>
+                      <div className="bg-gray-700 rounded p-3 font-mono text-sm space-y-1">
+                        <div className="text-gray-400">// Your solution</div>
+                        <div><span className="text-blue-400">class</span> <span className="text-yellow-400">Solution</span> <span className="text-gray-300">{"{"}</span></div>
+                        <div className="ml-2"><span className="text-blue-400">int</span> <span className="text-yellow-400">maxPathSum</span><span className="text-gray-300">(</span><span className="text-green-400">TreeNode*</span> <span className="text-gray-300">root) {"{"}</span></div>
+                        <div className="ml-4"><span className="text-blue-400">int</span> <span className="text-yellow-400">maxSum</span> <span className="text-gray-300">=</span> <span className="text-purple-400">INT_MIN</span><span className="text-gray-300">;</span></div>
+                        <div className="ml-4"><span className="text-yellow-400">dfs</span><span className="text-gray-300">(root, maxSum);</span></div>
+                        <div className="ml-4"><span className="text-blue-400">return</span> <span className="text-gray-300">maxSum;</span></div>
+                        <div className="ml-2"><span className="text-gray-300">{"}"}</span></div>
+                        <div><span className="text-gray-300">{"}"}</span></div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <Avatar className="h-6 w-6 bg-purple-500">
+                          <AvatarFallback className="text-xs font-semibold">BM</AvatarFallback>
+                        </Avatar>
+                        <span className="text-sm font-medium text-white">bigmama44</span>
+                        <div className="h-2 w-2 rounded-full bg-orange-400 animate-pulse"></div>
+                        <Badge className="bg-orange-500/20 text-orange-300 text-xs">Java</Badge>
+                      </div>
+                      <div className="bg-gray-700 rounded p-3 font-mono text-sm space-y-1">
+                        <div className="text-gray-400">// Opponent typing...</div>
+                        <div><span className="text-blue-400">class</span> <span className="text-yellow-400">Solution</span> <span className="text-gray-300">{"{"}</span></div>
+                        <div className="ml-2"><span className="text-blue-400">public</span> <span className="text-blue-400">int</span> <span className="text-yellow-400">maxPathSum</span><span className="text-gray-300">(</span><span className="text-green-400">TreeNode</span> <span className="text-gray-300">root) {"{"}</span></div>
+                        <div className="ml-4"><span className="text-blue-400">if</span><span className="text-gray-300">(root ==</span><span className="text-purple-400">null</span><span className="text-gray-300">)</span> <span className="text-blue-400">return</span> <span className="text-purple-400">0</span><span className="text-gray-300">;</span></div>
+                        <div className="ml-4"><span className="text-blue-400">int</span><span className="text-gray-300">[] maxSum = {"{"}</span><span className="text-green-400">Integer.MIN_VALUE</span><span className="text-gray-300">{"}"};</span></div>
+                        <div className="ml-4"><span className="text-yellow-400">dfs</span><span className="text-gray-300">(root, maxSum);</span></div>
+                        <div className="ml-4"><span className="text-blue-400">return</span> <span className="text-gray-300">maxSum[0];</span></div>
+                        <div className="ml-2"><span className="text-gray-300">{"}"}</span></div>
+                        <div><span className="text-gray-300">{"}"}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </section>
   )
