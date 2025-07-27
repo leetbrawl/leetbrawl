@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Code2, Trophy, Users, Zap, Globe, ArrowRight, Play, Timer, Brain } from "lucide-react"
+import { Code2, Users, Zap, Globe, ArrowRight, Timer, Brain } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { TrophyIcon } from "@/components/ui/trophy-icon"
+import { Target, Trophy, Briefcase, Users as UsersIcon, MapPin, Lightning } from "@phosphor-icons/react"
 
 export default function HomePage() {
   const router = useRouter()
@@ -14,9 +16,7 @@ export default function HomePage() {
     router.push("/practice/ranked")
   }
 
-  const handleTryDemo = () => {
-    router.push("/practice/free")
-  }
+
 
   const features = [
     {
@@ -25,7 +25,7 @@ export default function HomePage() {
       description: "Code against opponents live with instant feedback and synchronized problem solving.",
     },
     {
-      icon: <Trophy className="h-6 w-6" />,
+      icon: <TrophyIcon className="h-6 w-6" />,
       title: "Global Ranking",
       description: "Climb the leaderboard with ELO-based matchmaking and skill-based progression.",
     },
@@ -41,37 +41,85 @@ export default function HomePage() {
     },
   ]
 
-  const leaderboard = [
-    { rank: 1, username: "alex_chen", rating: 2847, avatar: "/placeholder.svg?height=40&width=40" },
-    { rank: 2, username: "sarah_dev", rating: 2756, avatar: "/placeholder.svg?height=40&width=40" },
-    { rank: 3, username: "mike_codes", rating: 2698, avatar: "/placeholder.svg?height=40&width=40" },
-    { rank: 4, username: "jenny_algo", rating: 2634, avatar: "/placeholder.svg?height=40&width=40" },
-    { rank: 5, username: "david_py", rating: 2587, avatar: "/placeholder.svg?height=40&width=40" },
+  const schoolRivalries = [
+    {
+      school: "Stanford",
+      rival: "UC Berkeley",
+      students: 847,
+      avgRating: 2156,
+      rivalryBonus: "2x ELO",
+    },
+    {
+      school: "MIT",
+      rival: "Harvard",
+      students: 623,
+      avgRating: 2289,
+      rivalryBonus: "2x ELO",
+    },
+    {
+      school: "CMU",
+      rival: "Georgia Tech",
+      students: 445,
+      avgRating: 2034,
+      rivalryBonus: "2x ELO",
+    },
+    {
+      school: "UIUC",
+      rival: "Michigan",
+      students: 567,
+      avgRating: 1987,
+      rivalryBonus: "2x ELO",
+    },
+  ]
+
+  const interviewPrepFeatures = [
+    {
+      title: "School Rivalries",
+      description: "Compete against students from rival schools. Win 2x ELO when you beat your rivals!",
+      icon: "🏆",
+    },
+    {
+      title: "Interview Prep",
+      description: "Practice with problems from top tech companies. Get ready for your dream job.",
+      icon: "💼",
+    },
+    {
+      title: "Local Leaderboards",
+      description: "See how you rank against classmates and nearby schools.",
+      icon: "🎯",
+    },
+    {
+      title: "Team Challenges",
+      description: "Form teams with classmates and compete against rival schools.",
+      icon: "👥",
+    },
   ]
 
   return (
     <div className="min-h-screen bg-[#0e0e10] text-white">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-[#121212]">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-gray-900/40 border-b border-gray-700/30 shadow-lg shadow-black/5">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-[#10b981] rounded-lg flex items-center justify-center">
+              <div className="h-8 w-8 bg-[#10b981] rounded-lg flex items-center justify-center shadow-lg">
                 <Code2 className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-semibold">leetbrawl</span>
+              <span className="text-xl font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                leetbrawl
+              </span>
             </div>
             <nav className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-gray-300 hover:text-white transition-colors">
+              <a href="#features" className="text-gray-300 hover:text-white transition-colors duration-200 font-medium">
                 Features
               </a>
-              <a href="#leaderboard" className="text-gray-300 hover:text-white transition-colors">
+              <a href="#leaderboard" className="text-gray-300 hover:text-white transition-colors duration-200 font-medium">
                 Leaderboard
               </a>
               <Button
                 variant="outline"
                 size="sm"
-                className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white bg-transparent"
+                className="border-gray-700/50 text-gray-300 hover:bg-gray-800/50 hover:text-white bg-transparent backdrop-blur-sm transition-all duration-200"
               >
                 Sign In
               </Button>
@@ -87,20 +135,13 @@ export default function HomePage() {
             {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <Badge className="bg-[#10b981]/10 text-[#10b981] border-[#10b981]/20 w-fit">
-                  Real-time competitive coding
-                </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                  Code faster.
+                  Prep Smarter.
                   <br />
-                  Think smarter.
-                  <br />
-                  <span className="text-[#10b981]">Win more.</span>
+                  <span className="text-[#10b981]">Brawl Harder.</span>
                 </h1>
                 <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
-                  Challenge developers worldwide in real-time coding battles. Solve algorithmic problems head-to-head
-                  and climb the global rankings.
-                </p>
+                Tired of solo grinding? LeetBrawl turns interview prep into real-time 1v1 coding battles. Challenge friends, match with nearby students, or brawl against coders from rival schools. Fast, fun, and built for getting better.                </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -112,32 +153,23 @@ export default function HomePage() {
                   Start a Match
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={handleTryDemo}
-                  className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white px-8 py-3 text-lg font-medium bg-transparent"
-                >
-                  <Play className="mr-2 h-5 w-5" />
-                  Try a Demo
-                </Button>
               </div>
             </div>
 
             {/* Right Mockup */}
             <div className="relative">
-              <Card className="bg-[#121212] border-gray-800 shadow-2xl">
+              <Card className="bg-gray-800 border-gray-600 shadow-2xl">
                 <CardContent className="p-0">
                   {/* Mockup Header */}
-                  <div className="border-b border-gray-800 p-4">
+                  <div className="border-b border-gray-600 px-4 py-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Trophy className="h-5 w-5 text-[#10b981]" />
-                        <span className="font-medium">Live Battle</span>
+                        <TrophyIcon className="h-5 w-5 text-[#10b981]" />
+                        <span className="font-medium text-white">Live Battle</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Timer className="h-4 w-4 text-orange-400" />
-                        <span className="text-orange-400 font-mono">15:42</span>
+                        <span className="text-orange-400 font-mono">12:34</span>
                       </div>
                     </div>
                   </div>
@@ -146,73 +178,72 @@ export default function HomePage() {
                   <div className="p-6 space-y-6">
                     {/* Problem Title */}
                     <div className="space-y-2">
-                      <h3 className="text-lg font-semibold">Two Sum</h3>
-                      <Badge className="bg-[#10b981]/10 text-[#10b981] border-[#10b981]/20">Easy</Badge>
+                      <h3 className="text-lg font-semibold text-white">Binary Tree Maximum Path Sum</h3>
+                      <div className="flex gap-2">
+                        <Badge className="bg-red-500/10 text-red-400 border-red-500/20">Hard</Badge>
+                        <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20">Trees</Badge>
+                      </div>
                     </div>
 
                     {/* Players */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <Avatar className="h-6 w-6">
-                            <AvatarImage src="/placeholder.svg?height=24&width=24" />
-                            <AvatarFallback>You</AvatarFallback>
+                          <Avatar className="h-6 w-6 bg-blue-500">
+                            <AvatarFallback className="text-xs font-semibold">NF</AvatarFallback>
                           </Avatar>
-                          <span className="text-sm font-medium">You</span>
+                          <span className="text-sm font-medium text-white">noforget (You)</span>
                           <div className="h-2 w-2 rounded-full bg-[#10b981]"></div>
+                          <Badge className="bg-blue-500/20 text-blue-300 text-xs">C++</Badge>
                         </div>
-                        <div className="bg-gray-900 rounded p-3 font-mono text-sm">
-                          <div className="text-gray-500">// Your solution</div>
-                          <div className="text-blue-400">function</div>
-                          <div className="text-gray-300">twoSum(nums, target) {"{"}...</div>
+                        <div className="bg-gray-700 rounded p-3 font-mono text-sm space-y-1">
+                          <div className="text-gray-400">// Your solution</div>
+                          <div><span className="text-blue-400">class</span> <span className="text-yellow-400">Solution</span> <span className="text-gray-300">{"{"}</span></div>
+                          <div className="ml-2"><span className="text-blue-400">int</span> <span className="text-yellow-400">maxPathSum</span><span className="text-gray-300">(</span><span className="text-green-400">TreeNode*</span> <span className="text-gray-300">root) {"{"}</span></div>
+                          <div className="ml-4"><span className="text-blue-400">int</span> <span className="text-yellow-400">maxSum</span> <span className="text-gray-300">=</span> <span className="text-purple-400">INT_MIN</span><span className="text-gray-300">;</span></div>
+                          <div className="ml-4"><span className="text-yellow-400">dfs</span><span className="text-gray-300">(root, maxSum);</span></div>
+                          <div className="ml-4"><span className="text-blue-400">return</span> <span className="text-gray-300">maxSum;</span></div>
+                          <div className="ml-2"><span className="text-gray-300">{"}"}</span></div>
+                          <div><span className="text-gray-300">{"}"}</span></div>
                         </div>
                       </div>
 
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <Avatar className="h-6 w-6">
-                            <AvatarImage src="/placeholder.svg?height=24&width=24" />
-                            <AvatarFallback>AC</AvatarFallback>
+                          <Avatar className="h-6 w-6 bg-purple-500">
+                            <AvatarFallback className="text-xs font-semibold">BM</AvatarFallback>
                           </Avatar>
-                          <span className="text-sm font-medium">alex_chen</span>
-                          <div className="h-2 w-2 rounded-full bg-orange-400"></div>
+                          <span className="text-sm font-medium text-white">bigmama44</span>
+                          <div className="h-2 w-2 rounded-full bg-orange-400 animate-pulse"></div>
+                          <Badge className="bg-orange-500/20 text-orange-300 text-xs">Java</Badge>
                         </div>
-                        <div className="bg-gray-900 rounded p-3 font-mono text-sm">
-                          <div className="text-gray-500">// Opponent typing...</div>
-                          <div className="text-purple-400">def</div>
-                          <div className="text-gray-300">two_sum(nums, target):</div>
+                        <div className="bg-gray-700 rounded p-3 font-mono text-sm space-y-1">
+                          <div className="text-gray-400">// Opponent typing...</div>
+                          <div><span className="text-blue-400">class</span> <span className="text-yellow-400">Solution</span> <span className="text-gray-300">{"{"}</span></div>
+                          <div className="ml-2"><span className="text-blue-400">public</span> <span className="text-blue-400">int</span> <span className="text-yellow-400">maxPathSum</span><span className="text-gray-300">(</span><span className="text-green-400">TreeNode</span> <span className="text-gray-300">root) {"{"}</span></div>
+                          <div className="ml-4"><span className="text-blue-400">if</span><span className="text-gray-300">(root ==</span><span className="text-purple-400">null</span><span className="text-gray-300">)</span> <span className="text-blue-400">return</span> <span className="text-purple-400">0</span><span className="text-gray-300">;</span></div>
+                          <div className="ml-4"><span className="text-blue-400">int</span><span className="text-gray-300">[] maxSum = {"{"}</span><span className="text-green-400">Integer.MIN_VALUE</span><span className="text-gray-300">{"}"};</span></div>
+                          <div className="ml-4"><span className="text-yellow-400">dfs</span><span className="text-gray-300">(root, maxSum);</span></div>
+                          <div className="ml-4"><span className="text-blue-400">return</span> <span className="text-gray-300">maxSum[0];</span></div>
+                          <div className="ml-2"><span className="text-gray-300">{"}"}</span></div>
+                          <div><span className="text-gray-300">{"}"}</span></div>
                         </div>
-                      </div>
-                    </div>
-
-                    {/* Test Results */}
-                    <div className="space-y-2">
-                      <div className="text-sm font-medium text-gray-300">Test Results</div>
-                      <div className="flex gap-2">
-                        <div className="h-2 w-8 bg-[#10b981] rounded"></div>
-                        <div className="h-2 w-8 bg-[#10b981] rounded"></div>
-                        <div className="h-2 w-8 bg-gray-700 rounded"></div>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 bg-[#10b981] text-white px-3 py-1 rounded-full text-sm font-medium">
-                Live
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-[#121212]">
+      <section id="features" className="py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-6">
           <div className="space-y-16">
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold">Built for competitive programmers</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold text-white">Built for competitive programmers</h2>
               <p className="text-xl text-gray-300 max-w-2xl">
                 Every feature designed to make you a better coder through real competition.
               </p>
@@ -226,7 +257,7 @@ export default function HomePage() {
                       {feature.icon}
                     </div>
                     <div className="space-y-2">
-                      <h3 className="text-lg font-semibold">{feature.title}</h3>
+                      <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
                       <p className="text-gray-400 leading-relaxed">{feature.description}</p>
                     </div>
                   </CardContent>
@@ -237,69 +268,150 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Leaderboard Section */}
-      <section id="leaderboard" className="py-20">
+      {/* Local Competition Section */}
+      <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="space-y-12">
+          <div className="space-y-16">
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold">Global Leaderboard</h2>
-              <p className="text-xl text-gray-300">
-                See where you rank among the world's best competitive programmers.
+              <h2 className="text-3xl lg:text-4xl font-bold text-white">Local Competition, Global Glory</h2>
+              <p className="text-xl text-gray-300 max-w-3xl leading-relaxed">
+                Start your competitive coding journey close to home. Challenge classmates, rival schools, and nearby universities. Build your reputation in your local scene before taking on the world.
               </p>
             </div>
 
-            <Card className="bg-[#121212] border-gray-800 max-w-2xl">
-              <CardContent className="p-0">
-                <div className="border-b border-gray-800 p-4">
-                  <div className="flex items-center gap-2">
-                    <Globe className="h-5 w-5 text-[#10b981]" />
-                    <span className="font-medium">Top Players</span>
+            {/* Advanced Competition Network */}
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left: Interactive Network Visualization */}
+              <div className="relative">
+                <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl border border-purple-500/20 p-8 shadow-xl shadow-purple-500/10">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-semibold text-white">Your Local Network</h3>
+                      <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                        Live
+                      </Badge>
+                    </div>
+                    
+                    {/* Network Stats */}
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-purple-500/10">
+                        <div className="text-2xl font-bold text-purple-400">847</div>
+                        <div className="text-sm text-gray-400">Nearby Students</div>
+                      </div>
+                      <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-purple-500/10">
+                        <div className="text-2xl font-bold text-blue-400">12</div>
+                        <div className="text-sm text-gray-400">Active Rivalries</div>
+                      </div>
+                      <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-purple-500/10">
+                        <div className="text-2xl font-bold text-purple-400">2.4x</div>
+                        <div className="text-sm text-gray-400">ELO Multiplier</div>
+                      </div>
+                    </div>
+
+                    {/* Live Activity Feed */}
+                    <div className="space-y-3">
+                      <h4 className="font-medium text-white">Recent Activity</h4>
+                      <div className="space-y-2 max-h-32 overflow-y-auto">
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="h-2 w-2 rounded-full bg-purple-400"></div>
+                          <span className="text-gray-300">alex_chen</span>
+                          <span className="text-gray-500">defeated</span>
+                          <span className="text-gray-300">sarah_dev</span>
+                          <span className="text-purple-400">+45 ELO</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="h-2 w-2 rounded-full bg-orange-400"></div>
+                          <span className="text-gray-300">mike_codes</span>
+                          <span className="text-gray-500">joined</span>
+                          <span className="text-blue-400">Stanford vs Berkeley</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="h-2 w-2 rounded-full bg-purple-400"></div>
+                          <span className="text-gray-300">jenny_algo</span>
+                          <span className="text-gray-500">solved</span>
+                          <span className="text-gray-300">Binary Tree Max Path</span>
+                          <span className="text-purple-400">in 8:32</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="divide-y divide-gray-800">
-                  {leaderboard.map((player) => (
-                    <div
-                      key={player.rank}
-                      className="p-4 flex items-center justify-between hover:bg-gray-900/50 transition-colors"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-8 text-center">
-                          <span
-                            className={`font-bold ${
-                              player.rank === 1
-                                ? "text-yellow-400"
-                                : player.rank === 2
-                                  ? "text-gray-300"
-                                  : player.rank === 3
-                                    ? "text-orange-400"
-                                    : "text-gray-500"
-                            }`}
-                          >
-                            #{player.rank}
-                          </span>
-                        </div>
-                        <Avatar className="h-10 w-10">
-                          <AvatarImage src={player.avatar || "/placeholder.svg"} />
-                          <AvatarFallback>{player.username.slice(0, 2).toUpperCase()}</AvatarFallback>
-                        </Avatar>
-                        <span className="font-medium">{player.username}</span>
-                      </div>
-                      <div className="text-[#10b981] font-bold">{player.rating}</div>
+              </div>
+
+              {/* Right: Advanced Features */}
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="h-12 w-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Target className="h-6 w-6 text-white" />
                     </div>
-                  ))}
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2 text-white">Smart Matchmaking</h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        Our AI finds the perfect opponents from your school, rival universities, and nearby cities. Get matched based on skill level, location, and rivalry preferences.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="h-12 w-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Trophy className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2 text-white">School Rivalries</h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        Earn 2x ELO when competing against rival schools. Create epic rivalries and watch your school dominate the regional leaderboards.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="h-12 w-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2 text-white">Interview Preparation</h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        Practice with problems from top tech companies. Compete against students targeting the same companies and build your professional network.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+
+                {/* Quick Actions */}
+                <div className="bg-slate-800/40 rounded-lg p-6 border border-purple-500/20">
+                  <h4 className="font-medium mb-4 text-white">Quick Actions</h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+                      <MapPin className="h-4 w-4 mr-2" />
+                      Find Nearby
+                    </Button>
+                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+                      <Trophy className="h-4 w-4 mr-2" />
+                      Join Rivalry
+                    </Button>
+                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+                      <UsersIcon className="h-4 w-4 mr-2" />
+                      Create Team
+                    </Button>
+                    <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+                      <Lightning className="h-4 w-4 mr-2" />
+                      View Rankings
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-[#121212]">
+      <section className="py-20 bg-slate-900">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
           <div className="space-y-4">
-            <h2 className="text-3xl lg:text-4xl font-bold">Ready to prove your skills?</h2>
-            <p className="text-xl text-gray-300">Join thousands of developers competing in real-time coding battles.</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Ready to start competing?</h2>
+            <p className="text-xl text-gray-300">Join thousands of students in real-time coding battles.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -309,14 +421,6 @@ export default function HomePage() {
             >
               Start Competing Now
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleTryDemo}
-              className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white px-8 py-3 text-lg font-medium bg-transparent"
-            >
-              Watch a Demo
             </Button>
           </div>
         </div>
@@ -333,7 +437,7 @@ export default function HomePage() {
                 </div>
                 <span className="font-semibold">leetbrawl</span>
               </div>
-              <p className="text-gray-400 text-sm">Real-time competitive coding platform for developers worldwide.</p>
+              <p className="text-gray-400 text-sm">Real-time competitive coding platform for students and developers.</p>
             </div>
 
             <div className="space-y-4">
@@ -343,10 +447,10 @@ export default function HomePage() {
                   How it Works
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white block transition-colors">
-                  Pricing
+                  Problems
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white block transition-colors">
-                  API
+                  Leaderboards
                 </a>
               </div>
             </div>
@@ -367,16 +471,16 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-4">
-              <h4 className="font-medium">Legal</h4>
+              <h4 className="font-medium">Support</h4>
               <div className="space-y-2 text-sm">
                 <a href="#" className="text-gray-400 hover:text-white block transition-colors">
-                  Terms
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white block transition-colors">
-                  Privacy
+                  Help Center
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white block transition-colors">
                   Contact
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white block transition-colors">
+                  Status
                 </a>
               </div>
             </div>
