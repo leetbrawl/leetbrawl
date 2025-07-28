@@ -128,7 +128,7 @@ export default function MatchPage() {
   }
 
   const handleViewSolution = () => {
-    console.log("Viewing solution")
+    // TODO: Implement solution viewing logic
   }
 
   return (

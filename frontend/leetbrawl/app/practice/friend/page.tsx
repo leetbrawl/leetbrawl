@@ -169,7 +169,7 @@ export default function PlayFriendPage() {
   }
 
   const handleViewSolution = () => {
-    console.log("Viewing solution")
+    // TODO: Implement solution viewing logic
   }
 
   const getStatusColor = (status: string) => {

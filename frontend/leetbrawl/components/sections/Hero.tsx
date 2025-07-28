@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Code2, ArrowRight, Timer } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { TrophyIcon } from "@/components/ui/trophy-icon"
+import BeamsBackground from "@/components/ui/beams-background"
 
 export default function Hero() {
   const router = useRouter()
@@ -16,30 +17,8 @@ export default function Hero() {
   }
 
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
-      {/* Tech Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 50%),
-            linear-gradient(45deg, transparent 40%, rgba(59, 130, 246, 0.1) 50%, transparent 60%),
-            linear-gradient(-45deg, transparent 40%, rgba(16, 185, 129, 0.1) 50%, transparent 60%)
-          `,
-          backgroundSize: '100% 100%, 100% 100%, 60px 60px, 60px 60px',
-          backgroundPosition: '0 0, 0 0, 0 0, 30px 30px'
-        }}></div>
-        {/* Code-like grid pattern */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px'
-        }}></div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <BeamsBackground intensity="medium" className="py-20 lg:py-32">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <div className="space-y-8">
@@ -146,6 +125,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </section>
+    </BeamsBackground>
   )
 } 

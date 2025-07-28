@@ -125,7 +125,7 @@ export default function FreePlayPage() {
   }
 
   const handleViewSolution = () => {
-    console.log("Viewing solution")
+    // TODO: Implement solution viewing logic
   }
 
   const handleRematch = () => {

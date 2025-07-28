@@ -39,7 +39,6 @@ interface SubmissionResult {
 const LANGUAGE_TEMPLATES = {
   javascript: `function solution(nums, target) {
     // Your code here
-    console.log("Input:", nums, target);
     return [];
 }`,
   python: `def solution(nums, target):
@@ -104,7 +103,7 @@ export function CodeEditor({ onRunTests, onSubmit, initialCode, initialLanguage 
       const results = await onRunTests(code, language)
       setTestResults(results)
     } catch (error) {
-      console.error("Error running tests:", error)
+      // TODO: Handle test execution errors
     } finally {
       setIsRunning(false)
     }
@@ -119,7 +118,13 @@ export function CodeEditor({ onRunTests, onSubmit, initialCode, initialLanguage 
       const result = await onSubmit(code, language)
       setSubmissionResult(result)
     } catch (error) {
-      console.error("Error submitting:", error)
+      setSubmissionResult({
+        success: false,
+        message: "Submission failed. Please try again.",
+        testsPassed: 0,
+        totalTests: 0,
+        executionTime: 0
+      })
     } finally {
       setIsSubmitting(false)
     }

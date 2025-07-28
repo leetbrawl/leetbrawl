@@ -1,10 +1,11 @@
 "use client"
 
+import { lazy } from "react"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import Hero from "@/components/sections/Hero"
-import Features from "@/components/sections/Features"
-import Competition from "@/components/sections/Competition"
+
+const Features = lazy(() => import("@/components/sections/Features"))
 
 export default function HomePage() {
   return (
@@ -12,7 +13,6 @@ export default function HomePage() {
       <Header />
       <Hero />
       <Features />
-      <Competition />
       <Footer />
     </div>
   )

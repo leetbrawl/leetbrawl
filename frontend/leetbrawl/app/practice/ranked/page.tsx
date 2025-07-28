@@ -124,7 +124,7 @@ export default function RankedPage() {
   }
 
   const handleViewSolution = () => {
-    console.log("Viewing solution")
+    // TODO: Implement solution viewing logic
   }
 
   const handleRematch = () => {
