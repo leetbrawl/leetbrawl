@@ -1,6 +1,6 @@
 "use client"
 
-import { lazy } from "react"
+import { lazy, Suspense } from "react"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import Hero from "@/components/sections/Hero"
@@ -12,7 +12,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#0e0e10] text-white">
       <Header />
       <Hero />
-      <Features />
+      <Suspense fallback={<div className="py-24 flex justify-center items-center text-white">Loading features...</div>}>
+        <Features />
+      </Suspense>
       <Footer />
     </div>
   )

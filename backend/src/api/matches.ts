@@ -16,8 +16,65 @@ interface AuthRequest extends Request {
 // POST /api/matches - create a new match
 router.post('/', authenticate, async (req: AuthRequest, res: Response) => {
   try {
-    const { type = 'RANKED', timeLimit = 30, maxPlayers = 2, inviteCode } = req.body;
+    const { 
+      type = 'RANKED', 
+      timeLimit = 30, 
+      maxPlayers = 2, 
+      inviteCode,
+      problemId,
+      difficulty 
+    } = req.body;
     const userId = req.user!.id;
+
+    // Select a problem for the match
+    let selectedProblemId = problemId;
+    
+    if (!selectedProblemId) {
+      // If no specific problem requested, select randomly based on difficulty and type
+      const whereClause: any = { isActive: true };
+      
+      if (difficulty) {
+        whereClause.difficulty = difficulty;
+      } else if (type === 'RANKED') {
+        // For ranked matches, select appropriate difficulty based on user rating
+        const user = await prisma.user.findUnique({
+          where: { id: userId },
+          select: { rating: true }
+        });
+        
+        if (user) {
+          if (user.rating < 1000) {
+            whereClause.difficulty = 'EASY';
+          } else if (user.rating < 1400) {
+            whereClause.difficulty = { in: ['EASY', 'MEDIUM'] };
+          } else {
+            // High-rated players get all difficulties
+          }
+        }
+      }
+
+      // Get random problem
+      const problems = await prisma.problem.findMany({
+        where: whereClause,
+        select: { id: true },
+        take: 10 // Get 10 and pick randomly to avoid always getting the same one
+      });
+
+      if (problems.length === 0) {
+        return res.status(400).json({ error: 'No suitable problems available' });
+      }
+
+      selectedProblemId = problems[Math.floor(Math.random() * problems.length)].id;
+    } else {
+      // Verify the requested problem exists and is active
+      const problem = await prisma.problem.findUnique({
+        where: { id: problemId, isActive: true }
+      });
+
+      if (!problem) {
+        return res.status(404).json({ error: 'Problem not found or inactive' });
+      }
+    }
 
     const match = await prisma.match.create({
       data: {
@@ -26,7 +83,7 @@ router.post('/', authenticate, async (req: AuthRequest, res: Response) => {
         timeLimit,
         maxPlayers,
         inviteCode: type === 'PRIVATE' ? inviteCode || generateInviteCode() : null,
-        problemId: 'dummy-problem-1', //todo: fake problem name
+        problemId: selectedProblemId,
         users: {
           connect: { id: userId }
         }
@@ -34,6 +91,15 @@ router.post('/', authenticate, async (req: AuthRequest, res: Response) => {
       include: {
         users: {
           select: { id: true, username: true, rating: true }
+        },
+        problem: {
+          select: { 
+            id: true, 
+            title: true, 
+            difficulty: true, 
+            timeLimit: true,
+            tags: true 
+          }
         }
       }
     });
@@ -184,6 +250,19 @@ router.get('/:matchId', authenticate, async (req: AuthRequest, res: Response) =>
       include: {
         users: {
           select: { id: true, username: true, rating: true }
+        },
+        problem: {
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            difficulty: true,
+            timeLimit: true,
+            memoryLimit: true,
+            tags: true,
+            category: true,
+            constraints: true
+          }
         },
         submissions: {
           include: {

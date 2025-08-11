@@ -6,6 +6,7 @@ import matchesRouter from './api/matches';
 import usersRouter from './api/users';
 import friendsRouter from './api/friends';
 import analyticsRouter from './api/analytics';
+import problemsRouter from './api/problems';
 import authRouter from './routes/auth';
 import protectedRouter from './routes/protected';
 import { setupSocket } from './sockets';
@@ -29,6 +30,7 @@ app.use('/api/matches', matchesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/friends', friendsRouter);
 app.use('/api/analytics', analyticsRouter);
+app.use('/api/problems', problemsRouter);
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));

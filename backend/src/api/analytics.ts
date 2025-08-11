@@ -32,20 +32,7 @@ router.get('/me/rating-history', authenticate, async (req: AuthRequest, res: Res
 
     const ratingHistory = await prisma.ratingHistory.findMany({
       where: whereClause,
-      orderBy: { createdAt: 'asc' },
-      include: {
-        match: {
-          select: {
-            id: true,
-            type: true,
-            completedAt: true,
-            users: {
-              where: { id: { not: userId } },
-              select: { id: true, username: true, rating: true }
-            }
-          }
-        }
-      }
+      orderBy: { createdAt: 'asc' }
     });
 
     // Add peak and lowest ratings
@@ -244,10 +231,10 @@ router.get('/me/head-to-head/:opponentId', authenticate, async (req: AuthRequest
         completedAt: match.completedAt,
         userSubmissions: userSubmissions.length,
         opponentSubmissions: opponentSubmissions.length,
-        userFastestTime: userSubmissions.reduce((min, s) => 
-          s.executionTime && (!min || s.executionTime < min) ? s.executionTime : min, null),
-        opponentFastestTime: opponentSubmissions.reduce((min, s) => 
-          s.executionTime && (!min || s.executionTime < min) ? s.executionTime : min, null)
+        userFastestTime: userSubmissions.reduce((min: number | null, s) => 
+          s.executionTime && (!min || s.executionTime < min) ? s.executionTime : min, null as number | null),
+        opponentFastestTime: opponentSubmissions.reduce((min: number | null, s) => 
+          s.executionTime && (!min || s.executionTime < min) ? s.executionTime : min, null as number | null)
       };
     });
 

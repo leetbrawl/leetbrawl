@@ -42,12 +42,7 @@ router.get('/me/stats', authenticate, async (req: AuthRequest, res: Response) =>
     const ratingHistory = await prisma.ratingHistory.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
-      take: 10, // Reduced for dashboard, full history available in analytics
-      include: {
-        match: {
-          select: { type: true, completedAt: true }
-        }
-      }
+      take: 10 // Reduced for dashboard, full history available in analytics
     });
 
     // Get recent matches

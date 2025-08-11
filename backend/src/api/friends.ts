@@ -22,7 +22,7 @@ router.get('/', authenticate, async (req: AuthRequest, res: Response) => {
 
     // This would work if we had a Friendship model
     // For now, return empty array with structure
-    const friends = []; // TODO: Implement when Friendship model is added
+    const friends: any[] = []; // TODO: Implement when Friendship model is added
 
     res.json({
       friends,
@@ -40,8 +40,8 @@ router.get('/requests', authenticate, async (req: AuthRequest, res: Response) =>
     const userId = req.user!.id;
 
     // TODO: Implement when Friendship model is added
-    const incomingRequests = [];
-    const outgoingRequests = [];
+    const incomingRequests: any[] = [];
+    const outgoingRequests: any[] = [];
 
     res.json({
       incoming: incomingRequests,
