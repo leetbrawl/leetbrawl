@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(set JWT_SECRET=your-very-secure-secret-key-for-leetbrawl-development)",
+      "Bash(set DATABASE_URL=postgresql://user:password@localhost:5432/leetbrawl)",
+      "Bash(set PORT=3001)",
+      "Bash(npm run dev:*)",
+      "Bash(docker compose:*)",
+      "Bash(npm run migrate:*)",
+      "Bash(npx prisma migrate reset:*)",
+      "Bash(npm run prisma:generate:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(taskkill:*)",
+      "Bash(npx next:*)",
+      "Bash(npm run generate:*)",
+      "Bash(curl:*)"
+    ],
+    "deny": []
+  }
+}
